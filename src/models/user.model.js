@@ -10,15 +10,16 @@ const userSchema = new Schema({
         trim: true,
         index: true
     },
-    emai: {
+    email: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
         trim: true,
+        sparse:true
 
     },
-    fullname: {
+    fullName: {
 
         type: String,
         required: true,
@@ -62,9 +63,9 @@ userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this.id,
-            email: this.emai,
+            email: this.email,
             username: this.username,
-            fullname: this.fullname
+            fullName: this.fullName
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
